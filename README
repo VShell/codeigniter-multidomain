@@ -9,4 +9,24 @@ This will not be backwards-compatible with your existing config/router.php
 Developed by Cameron Turner (kladiin@kladiin.net)
 Released under a simplified BSD license - see source code files for details.
 
-TODO: Write an example application
+-----------------
+routes.php format
+-----------------
+
+routes.php is relatively similar to the old routes.php format, however, it is not backwards-compatible.
+
+$routes is now a 2-dimensional array. The first part of the array is a regex matching the domain 
+name, and the second is a regex matching the pathname. The values must be strings pointing to a 
+controller in the controllers/ directory.
+
+See example_application/config/config.php for a very simple example.
+
+In addition, without any routes set up, for an URL http://www.example.com/hi/foo/bar/method/param1,
+the application will do the following:
+* Check to see that controllers/www.example.com/hi is a directory - if it is then:
+* Check to see that controllers/www.example.com/hi/foo is a directory - if it is then:
+* Check to see that controllers/www.example.com/hi/foo/bar is a directory - if it is not then:
+* Check to see that controllers/www.example.com/hi/foo/bar.php is a file - if it is, then use that as a controller
+
+It will also run "common" controllers on any domain - these controllers should be put in the root 
+controllers/ directory.
