@@ -1,0 +1,9 @@
+codeigniter-multidomain
+=======================
+
+This is a simple replacement implementation of the Router class, allowing you to match against 
+domain names in addition to the already-present pathnames.
+
+This will not be backwards-compatible with your existing config/router.php
+
+TODO: Write an example application
