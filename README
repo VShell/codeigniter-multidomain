@@ -6,4 +6,7 @@ domain names in addition to the already-present pathnames.
 
 This will not be backwards-compatible with your existing config/router.php
 
+Developed by Cameron Turner (kladiin@kladiin.net)
+Released under a simplified BSD license - see source code files for details.
+
 TODO: Write an example application
