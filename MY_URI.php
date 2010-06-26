@@ -39,7 +39,7 @@ class MY_URI extends CI_URI {
 	
 	function protocol()
 	{
-		return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']!='' && $_SERVER['HTTPS']!='off') ? 'http' : 'https';
+		return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']!='' && $_SERVER['HTTPS']!='off') ? 'https' : 'http';
 	}
 
 	function host()
