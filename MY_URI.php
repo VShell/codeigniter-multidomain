@@ -47,7 +47,7 @@ class MY_URI extends CI_URI {
 		$host = $_SERVER['HTTP_HOST'];
 		if(($this->protocol() == 'https' && $_SERVER['SERVER_PORT'] != 443) || ($this->protocol() == 'http' && $_SERVER['SERVER_PORT'] != 80))
 		{
-			$base_url .= ':'.$_SERVER['SERVER_PORT'];
+			$host .= ':'.$_SERVER['SERVER_PORT'];
 		}
 		return $host;
 	}

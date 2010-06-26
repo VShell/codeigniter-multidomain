@@ -150,7 +150,7 @@ class MY_Router extends CI_Router {
 		// Parse hosts
 		$route = $this->_parse_hosts();
 		
-		$this->config->set_item('host_dir', $this->_hostdir);
+		$this->config->set_item('host_dir', $this->hostdir);
 		
 		// Update the default controller and scaffolding command
 		if (isset($route['default_controller']))
