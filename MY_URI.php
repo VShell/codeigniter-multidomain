@@ -30,7 +30,15 @@ or implied, of Cameron Turner.
 class MY_URI extends CI_URI {
 	function _fetch_uri_string()
 	{
-		$this->config->set_item('base_url', ($_SERVER['HTTPS']?'https':'http').'://'.$this->host().parse_url($this->config->item('base_url'), PHP_URL_PATH));
+		$https = $_SERVER['HTTPS']!='' && $_SERVER['HTTPS']!='off';
+		$base_url = ($https?'https':'http').'://';
+		$base_url .= $this->host();
+		if(($https && $_SERVER['SERVER_PORT'] != 443) || (!$https && $_SERVER['SERVER_PORT'] != 80))
+		{
+			$base_url .= ':'.$_SERVER['SERVER_PORT'];
+		}
+		$base_url .= parse_url($this->config->item('base_url'), PHP_URL_PATH);
+		$this->config->set_item('base_url', $base_url);
 		parent::_fetch_uri_string();
 	}
 
