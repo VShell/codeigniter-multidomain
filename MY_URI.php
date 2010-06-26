@@ -30,7 +30,7 @@ or implied, of Cameron Turner.
 class MY_URI extends CI_URI {
 	function _fetch_uri_string()
 	{
-		$https = $_SERVER['HTTPS']!='' && $_SERVER['HTTPS']!='off';
+		$https = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']!='' && $_SERVER['HTTPS']!='off';
 		$base_url = ($https?'https':'http').'://';
 		$base_url .= $this->host();
 		if(($https && $_SERVER['SERVER_PORT'] != 443) || (!$https && $_SERVER['SERVER_PORT'] != 80))
