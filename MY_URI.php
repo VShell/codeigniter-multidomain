@@ -28,6 +28,12 @@ or implied, of Cameron Turner.
 */
 
 class MY_URI extends CI_URI {
+	function _fetch_uri_string()
+	{
+		$this->config->set_item('base_url', ($_SERVER['HTTPS']?'https':'http').'://'.$this->host().parse_url($this->config->item('base_url'), PHP_URL_PATH));
+		parent::_fetch_uri_string();
+	}
+
 	function host()
 	{
 		return $_SERVER['HTTP_HOST'];
