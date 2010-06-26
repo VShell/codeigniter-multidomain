@@ -30,20 +30,31 @@ or implied, of Cameron Turner.
 class MY_URI extends CI_URI {
 	function _fetch_uri_string()
 	{
-		$https = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']!='' && $_SERVER['HTTPS']!='off';
-		$base_url = ($https?'https':'http').'://';
+		$base_url = $this->protocol().'://';
 		$base_url .= $this->host();
-		if(($https && $_SERVER['SERVER_PORT'] != 443) || (!$https && $_SERVER['SERVER_PORT'] != 80))
-		{
-			$base_url .= ':'.$_SERVER['SERVER_PORT'];
-		}
 		$base_url .= parse_url($this->config->item('base_url'), PHP_URL_PATH);
 		$this->config->set_item('base_url', $base_url);
 		parent::_fetch_uri_string();
 	}
+	
+	function protocol()
+	{
+		return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']!='' && $_SERVER['HTTPS']!='off') ? 'http' : 'https';
+	}
 
 	function host()
 	{
-		return $_SERVER['HTTP_HOST'];
+		$host = $_SERVER['HTTP_HOST'];
+		if(($this->protocol() == 'https' && $_SERVER['SERVER_PORT'] != 443) || (($this->protocol() == 'http' && $_SERVER['SERVER_PORT'] != 80))
+		{
+			$base_url .= ':'.$_SERVER['SERVER_PORT'];
+		}
+		return $host;
+	}
+	
+	function domain()
+	{
+		$host = parse_url($this->host());
+		return $host['host'].(isset($host['port']) ? ':'.$host['port'] : '');
 	}
 }
