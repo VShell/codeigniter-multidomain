@@ -82,7 +82,7 @@ class MY_Router extends CI_Router {
 		}
 		
 		// Is the controller in a sub-folder?
-		while (count($segments) > 0 && is_dir(APPPATH.'controllers/'.$this->fetch_directory().$segments[0]))
+		while (count($segments) > 0 && !is_file(APPPATH.'controllers/'.$this->fetch_directory().$segments[0].EXT) && is_dir(APPPATH.'controllers/'.$this->fetch_directory().$segments[0]))
 		{
 			$this->set_directory($this->fetch_directory().array_shift($segments));
 		}
@@ -213,7 +213,7 @@ class MY_Router extends CI_Router {
 		{
 			$this->set_directory($this->hostdir);
 			$segments = $this->uri->segments;
-			while (count($segments) > 0 && is_dir(APPPATH.'controllers/'.$this->fetch_directory().$segments[0]))
+			while (count($segments) > 0 && !is_file(APPPATH.'controllers/'.$this->fetch_directory().$segments[0].EXT) && is_dir(APPPATH.'controllers/'.$this->fetch_directory().$segments[0]))
 			{
 				$this->set_directory($this->fetch_directory().array_shift($segments));
 			}
