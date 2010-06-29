@@ -54,7 +54,7 @@ class MY_URI extends CI_URI {
 	
 	function domain()
 	{
-		$host = parse_url($this->host());
+		$host = parse_url($this->protocol().'://'.$this->host());
 		return $host['host'].(isset($host['port']) ? ':'.$host['port'] : '');
 	}
 }
